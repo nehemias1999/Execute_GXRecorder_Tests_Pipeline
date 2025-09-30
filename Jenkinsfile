@@ -7,7 +7,7 @@ pipeline
 
         MSBuildPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
         GeneXusInstallationPath = "C:\\Program Files (x86)\\GeneXus\\GeneXus18U12"       
-        LocalKBPath = "C:\\Models\\CONUAR_Requerimientos"
+        LocalKBPath = "C:\\Models\\GXRecorderKB"
         LocalKBEnvironment = "DEV"
         TestType = 'UI'
         GXRecorderTestsFilePath = "E:\\Jenkins_root\\workspace\\BANCOR\\BancorTrunk\\Tests"
