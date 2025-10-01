@@ -53,7 +53,7 @@ pipeline {
 
                 script {
 
-                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
+                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}" usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
 
                         bat label: 'Build KB MSBuild Script',
                         script: "${env.buildMSBuildScript}"
@@ -77,7 +77,7 @@ pipeline {
 
                 script {
 
-                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
+                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}" usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
 
                         bat label: "Run GXRecorder Tests",
                         script: "${env.runGXRecorderTestsScript}"
