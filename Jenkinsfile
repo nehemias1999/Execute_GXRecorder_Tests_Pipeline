@@ -19,8 +19,8 @@ pipeline {
         CompileMains = 'true'
 
         buildMSBuildScript = '"%MSBuildPath%\\MSBuild.exe" "%GeneXusInstallationPath%\\TeamDev.msbuild" ' +
-                             '/p:DbaseServerUsername="%GXServerUsername%" ' +
-                             '/p:DbaseServerPassword="%GXServerPassword%" ' +
+                             '/p:DbaseServerUsername="root" ' +
+                             '/p:DbaseServerPassword="root" ' +
                              '/p:WorkingDirectory="%LocalKBPath%" ' +
                              '/p:WorkingVersion="%LocalKBVersion%" ' +
                              '/p:WorkingEnvironment="%LocalKBEnvironment%" ' +
