@@ -35,7 +35,7 @@ pipeline {
         TestType = 'UI'
         // GXRecorderTestsFilePath = "E:\\Jenkins_root\\workspace\\BANCOR\\BancorTrunk\\Tests"
 
-        runGXRecorderTestsScript = '"%MSBuildPath%\\msbuild.exe" "msbuild\\RunAllTests.msbuild" ' +
+        runGXRecorderTestsScript = '"%MSBuildPath%\\msbuild.exe" "%GeneXusInstallationPath%\\RunAllTests.msbuild" ' +
                                    '/p:GX_PROGRAM_DIR="%GeneXusInstallationPath%" ' +
                                    '/p:KBPath="%LocalKBPath%" ' +
                                    '/p:EnvironmentName="%LocalKBEnvironment%" ' +
