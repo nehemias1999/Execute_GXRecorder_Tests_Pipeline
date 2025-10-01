@@ -4,14 +4,32 @@ pipeline {
 
     environment {
 
-        MSBuildPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-        GeneXusInstallationPath = "C:\\Program Files (x86)\\GeneXus\\GeneXus18U13"       
-        LocalKBPath = "C:\\Models\\LetsPlai"
-        LocalKBEnvironment = "DEV"
-        TestType = 'UI'
-        GXRecorderTestsFilePath = "E:\\Jenkins_root\\workspace\\BANCOR\\BancorTrunk\\Tests"
-
         GXServerCredentials = "GXServer18"
+
+        /* Stage 'Build KB' */
+
+        MSBuildPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+        GeneXusInstallationPath = "C:\\Program Files (x86)\\GeneXus\\GeneXus18U13"  
+        LocalKBPath = "C:\\Models\\LetsPlai"
+        LocalKBVersion = 'LetsPlai'
+        LocalKBEnvironment = 'DEV'
+        ForceRebuild = 'false'
+        CompileMains = 'true'
+
+        buildMSBuildScript = '"%MSBuildPath%\\MSBuild.exe" "%GeneXusInstallationPath%\\TeamDev.msbuild" ' +
+                             '/p:DbaseServerUsername="%GXServerUsername%" ' +
+                             '/p:DbaseServerPassword="%GXServerPassword%" ' +
+                             '/p:WorkingDirectory="%LocalKBPath%" ' +
+                             '/p:WorkingVersion="%LocalKBVersion%" ' +
+                             '/p:WorkingEnvironment="%LocalKBEnvironment%" ' +
+                             '/p:ForceRebuild="%ForceRebuild%" ' + 
+                             '/p:CompileMains="%CompileMains%" ' +
+                             '/t:Build'
+
+        /* Stage 'Run GXRecorder Tests' */
+
+        TestType = 'UI'
+        // GXRecorderTestsFilePath = "E:\\Jenkins_root\\workspace\\BANCOR\\BancorTrunk\\Tests"
 
         runGXRecorderTestsScript = '"%MSBuildPath%\\msbuild.exe" "msbuild\\RunAllTests.msbuild" ' +
                                    '/p:GX_PROGRAM_DIR="%GeneXusInstallationPath%" ' +
@@ -20,14 +38,38 @@ pipeline {
                                    '/p:TestType="%TestType%" ' +
                                    '/p:GXServerUser="%GXServerUsername%" ' +
                                    '/p:GXServerPass="%GXServerPassword%" ' +
-                                   '/p:JUnitTestFilePath="%GXRecorderTestsFilePath%" ' +
+                                //    '/p:JUnitTestFilePath="%GXRecorderTestsFilePath%" ' +
                                    '/t:RunAllTests'
 
     }
 
     stages {
+
+        stage('Build KB') {
+
+            steps {
+
+                echo 'Start Build KB'
+
+                script {
+
+                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
+
+                        bat label: 'Build KB MSBuild Script',
+                        script: "${env.buildMSBuildScript}"
+
+                    }
+
+                }
+
+                echo 'End Build KB'
+
+            }
+
+        }
+
             
-        stage("Run GXRecorder Tests") {
+        stage('Run GXRecorder Tests') {
 
             steps {
 
