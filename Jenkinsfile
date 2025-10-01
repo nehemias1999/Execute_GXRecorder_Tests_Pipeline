@@ -10,8 +10,8 @@ pipeline {
 
         MSBuildPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
         GeneXusInstallationPath = "C:\\Program Files (x86)\\GeneXus\\GeneXus18U13" 
-        GXServerUsername = "local\\sa_jenkins_genexus"
-        GXServerPassword = '567NTb0L4L4wjK4hZkAl'
+        GXServerUsername = "local\\sa_jenkins"
+        GXServerPassword = '$Hd1U#edS1YPd8Nxnr6d'
         LocalKBPath = "C:\\Models\\LetsPlai"
         LocalKBVersion = 'LetsPlai'
         LocalKBEnvironment = 'DEV'
@@ -19,8 +19,8 @@ pipeline {
         CompileMains = 'true'
 
         buildMSBuildScript = '"%MSBuildPath%\\MSBuild.exe" "%GeneXusInstallationPath%\\TeamDev.msbuild" ' +
-                             '/p:DbaseServerUsername="root" ' +
-                             '/p:DbaseServerPassword="root" ' +
+                             '/p:DbaseServerUsername="%GXServerUsername%" ' +
+                             '/p:DbaseServerPassword="%GXServerPassword%" ' +
                              '/p:WorkingDirectory="%LocalKBPath%" ' +
                              '/p:WorkingVersion="%LocalKBVersion%" ' +
                              '/p:WorkingEnvironment="%LocalKBEnvironment%" ' +
