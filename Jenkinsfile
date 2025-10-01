@@ -19,7 +19,7 @@ pipeline {
         CompileMains = 'true'
 
         buildMSBuildScript = '"%MSBuildPath%\\MSBuild.exe" "%GeneXusInstallationPath%\\TeamDev.msbuild" ' +
-                             '/p:DbaseServerUsername="root" ' +
+                             '/p:DbaseServerUsername="local\\root" ' +
                              '/p:DbaseServerPassword="root" ' +
                             //  '/p:DbaseServerUsername="%GXServerUsername%" ' +
                             //  '/p:DbaseServerPassword="%GXServerPassword%" ' +
@@ -49,28 +49,28 @@ pipeline {
 
     stages {
 
-        // stage('Build KB') {
+        stage('Build KB') {
 
-        //     steps {
+            steps {
 
-        //         echo 'Start Build KB'
+                echo 'Start Build KB'
 
-        //         script {
+                script {
 
-        //             // withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", passwordVariable: 'GXServerPassword', usernameVariable: 'GXServerUsername')]) {
+                    // withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", passwordVariable: 'GXServerPassword', usernameVariable: 'GXServerUsername')]) {
 
-        //                 bat label: 'Build KB MSBuild Script',
-        //                 script: "${env.buildMSBuildScript}"
+                        bat label: 'Build KB MSBuild Script',
+                        script: "${env.buildMSBuildScript}"
 
-        //             // }
+                    // }
 
-        //         }
+                }
 
-        //         echo 'End Build KB'
+                echo 'End Build KB'
 
-        //     }
+            }
 
-        // }
+        }
 
             
         stage('Run GXRecorder Tests') {
