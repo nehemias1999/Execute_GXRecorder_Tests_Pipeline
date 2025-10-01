@@ -20,7 +20,7 @@ pipeline {
                                    '/p:TestType="%TestType%" ' +
                                    '/p:GXServerUser="%GXServerUsername%" ' +
                                    '/p:GXServerPass="%GXServerPassword%" ' +
-                                //    '/p:JUnitTestFilePath="%GXRecorderTestsFilePath%" ' +
+                                   '/p:JUnitTestFilePath="%GXRecorderTestsFilePath%" ' +
                                    '/t:RunAllTests'
 
     }
