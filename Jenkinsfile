@@ -9,7 +9,9 @@ pipeline {
         /* Stage 'Build KB' */
 
         MSBuildPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-        GeneXusInstallationPath = "C:\\Program Files (x86)\\GeneXus\\GeneXus18U13"  
+        GeneXusInstallationPath = "C:\\Program Files (x86)\\GeneXus\\GeneXus18U13" 
+        GXServerUsername = 'sa_jenkins_genexus'
+        GXServerPassword = '567NTb0L4L4wjK4hZkAl' 
         LocalKBPath = "C:\\Models\\LetsPlai"
         LocalKBVersion = 'LetsPlai'
         LocalKBEnvironment = 'DEV'
@@ -53,12 +55,12 @@ pipeline {
 
                 script {
 
-                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", passwordVariable: 'GXServerPassword', usernameVariable: 'GXServerUsername')]) {
+                    // withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", passwordVariable: 'GXServerPassword', usernameVariable: 'GXServerUsername')]) {
 
                         bat label: 'Build KB MSBuild Script',
                         script: "${env.buildMSBuildScript}"
 
-                    }
+                    // }
 
                 }
 
@@ -77,12 +79,12 @@ pipeline {
 
                 script {
 
-                    withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
+                    // withCredentials([usernamePassword(credentialsId: "${env.GXServerCredentials}", usernameVariable: 'GXServerUsername', passwordVariable: 'GXServerPassword')]) {
 
                         bat label: "Run GXRecorder Tests",
                         script: "${env.runGXRecorderTestsScript}"
 
-                    }
+                    // }
 
                 }
 
